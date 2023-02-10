@@ -16,7 +16,7 @@ namespace tabuleiro
         {
             Linhas = linhas;
             Colunas = colunas;
-            Pecas = new Peca[linhas,colunas];
+            Pecas = new Peca[linhas, colunas];
         }
 
         public Peca peca(int linha, int coluna)
@@ -24,10 +24,46 @@ namespace tabuleiro
             return Pecas[linha, coluna];
         }
 
+        public Peca peca(Posicao pos)
+        {
+            return Pecas[pos.Linha, pos.Coluna];
+        }
+
+        public bool ExistePeca(Posicao pos)
+        {
+            //Testa primeiro se a posição e valida primeiro para depois verificar se existe peça
+            ValidarPosicao(pos);
+            return peca(pos) != null;
+        }
+
         public void ColocarPeca(Peca p, Posicao pos)
         {
+            if (ExistePeca(pos))
+            {
+                throw new TabuleiroException("Já existe uma peça nessa posição! ");
+            }
             Pecas[pos.Linha, pos.Coluna] = p;
             p.Posicao = pos;
+        }
+
+        //Fazendo teste de posição valida
+        public bool PosicaoValida(Posicao pos)
+        {
+            if (pos.Linha < 0 || pos.Linha >= Linhas || pos.Coluna < 0 || pos.Coluna >= Colunas)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        //Jogando a exceção caso a possição não seja valida
+        public void ValidarPosicao(Posicao pos)
+        {
+            if (PosicaoValida(pos) == false)
+            {
+                throw new TabuleiroException("Posição inválida!");
+            }
         }
     }
 }
