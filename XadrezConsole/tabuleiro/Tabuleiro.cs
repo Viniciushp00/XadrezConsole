@@ -19,11 +19,15 @@ namespace tabuleiro
             Pecas = new Peca[linhas, colunas];
         }
 
+        //Se for nulo não tem peça na casa.
+        //Se for verdadeiro retorna a peça.
         public Peca peca(int linha, int coluna)
         {
             return Pecas[linha, coluna];
         }
 
+        //Se for nulo não tem peça na casa.
+        //Se for verdadeiro retorna a peça.
         public Peca peca(Posicao pos)
         {
             return Pecas[pos.Linha, pos.Coluna];

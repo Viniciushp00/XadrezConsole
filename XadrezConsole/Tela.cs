@@ -20,35 +20,68 @@ namespace XadrezConsole
 
                 for (int j = 0; j < tab.Colunas; j++)
                 {
-
-                    //If para testar se existe alguma peça naquela casa do tabuleiro
-                    if (tab.peca(i, j) is null)
-                    {
-                        Console.Write("- ");
-                    }
-                    else
-                    {
-                        imprimirPeca(tab.peca(i, j));
-                        Console.Write(" ");
-                    }
+                    imprimirPeca(tab.peca(i, j));
                 }
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
         }
 
+        public static void imprimirTabuleiro(Tabuleiro tab, bool[,] posicoesPossiveis)
+        {
+            ConsoleColor fundoOriginal = Console.BackgroundColor;
+            ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
+
+            //Implementando o For para passar por todas as casas do tabuleiro
+            for (int i = 0; i < tab.Linhas; i++)
+            {
+                Console.Write(8 - i + " ");
+
+                for (int j = 0; j < tab.Colunas; j++)
+                {
+                    //Se for possivel mover irá mudar o fundo.
+                    if (posicoesPossiveis[i,j])
+                    {
+                        Console.BackgroundColor = fundoAlterado;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = fundoOriginal;
+                    }
+                    imprimirPeca(tab.peca(i, j));
+                    Console.BackgroundColor = fundoOriginal;
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("  a b c d e f g h");
+
+            //Fazendo o fundo voltar ao normal
+            Console.BackgroundColor = fundoOriginal;
+        }
+
+
         public static void imprimirPeca(Peca peca)
         {
-            if (peca.Cor == Cor.Branca)
+            //If para testar se existe alguma peça naquela casa do tabuleiro
+            if (peca == null)
             {
-                Console.Write(peca);
+                Console.Write("- ");
             }
             else
             {
-                ConsoleColor aux = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(peca);
-                Console.ForegroundColor = aux;
+                if (peca.Cor == Cor.Branca)
+                {
+                    Console.Write(peca);
+                }
+                else
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(peca);
+                    Console.ForegroundColor = aux;
+                }
+
+                Console.Write(" ");
             }
         }
 

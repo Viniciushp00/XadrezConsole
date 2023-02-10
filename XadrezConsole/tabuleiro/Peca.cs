@@ -7,7 +7,7 @@ using tabuleiro;
 
 namespace tabuleiro
 {
-    internal class Peca
+    internal abstract class Peca
     {
         public Posicao Posicao { get; set; }
         public Cor Cor { get; protected set; }
@@ -26,5 +26,11 @@ namespace tabuleiro
         {
             QteMovimento++;
         }
+
+        /*
+         * Como a classe peça e muito generica para definir os movimentos de cada peça, será necessário tornar esse metódo
+         * e a classe em abstratos, para que as classes das peças consigam utilizar ela.
+        */
+        public abstract bool[,] movimentosPossiveis();
     }
 }
