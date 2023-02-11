@@ -27,6 +27,27 @@ namespace tabuleiro
             QteMovimento++;
         }
 
+        public bool existeMovimentosPossiveis()
+        {
+            bool[,] mat = movimentosPossiveis();
+            for (int i = 0; i < Tab.Linhas; i++)
+            {
+                for (int j = 0; j < Tab.Colunas; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool podeMoverPara(Posicao pos)
+        {
+            return movimentosPossiveis()[pos.Linha, pos.Coluna];
+        }
+
         /*
          * Como a classe peça e muito generica para definir os movimentos de cada peça, será necessário tornar esse metódo
          * e a classe em abstratos, para que as classes das peças consigam utilizar ela.
