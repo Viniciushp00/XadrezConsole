@@ -16,9 +16,7 @@ namespace XadrezConsole
                     try
                     {
                         Console.Clear();
-                        Tela.imprimirTabuleiro(partida.Tab);
-                        Console.WriteLine("\nTurno: " + partida.Turno);
-                        Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
+                        Tela.imprimirPartida(partida);
 
 
                         Console.Write("\nOrigem: ");
